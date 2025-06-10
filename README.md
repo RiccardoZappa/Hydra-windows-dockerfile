@@ -1,7 +1,7 @@
 Docker file needed to set up the hydra enviroment on windows. There is also a python script to change the relative addresses of github repository of the rosintall file of hydra.
 I inserted a hydra copy in this repository and below there is the explanation of how to build the docker image and run it with the hydra project mounted, so that you can work and modify the hydra project and build it even on windows computers.
 
-# Hydra ROS Docker Setup
+# Hydra Docker Setup
 
 This guide provides the necessary steps to build the Docker image and run the container for the Hydra project.
 
