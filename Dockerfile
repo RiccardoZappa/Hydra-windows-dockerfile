@@ -16,26 +16,3 @@ COPY utils/transform_rosinstall.py /
 ENV DEBIAN_FRONTEND="noninteractive"
 RUN apt update \
 && apt install -y python3-catkin-tools git python3-rosdep python3-vcstool
-RUN mkdir -p /catkin_ws/src;
-WORKDIR /catkin_ws
-RUN catkin init
-RUN catkin config --extend "/opt/ros/noetic"
-RUN catkin config --merge-devel
-RUN catkin config -DCMAKE_BUILD_TYPE=Release
-  
-
-# Create and configure the catkin workspace
-WORKDIR /catkin_ws/src
-RUN git clone https://github.com/MIT-SPARK/Hydra.git hydra
-
-RUN chmod +x ../../transform_rosinstall.py
-# Path to the .rosinstall file (both original and transformed will use this path)
-ENV ROSINSTALL_FILE=hydra/install/hydra.rosinstall
-
-# Run the transformation script, overwriting the original file
-# We use the same path for input and output
-RUN python3 ../../transform_rosinstall.py ${ROSINSTALL_FILE} ${ROSINSTALL_FILE}
-RUN vcs import . < hydra/install/hydra.rosinstall
-RUN rosdep install --from-paths . --ignore-src -r -y
-WORKDIR /catkin_ws
-RUN catkin build 
