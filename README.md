@@ -38,3 +38,10 @@ docker run -it -v "${PWD}/Hydra:/catkin_ws/src/hydra" hydra_ros_image bash
 ### 3. Build hydra
 
 After you run the container, see the hydra guide to build the project in the container at [Hydra](https://github.com/MIT-SPARK/Hydra).
+
+### 4. Set Up the ROS Environment (Every New Terminal)
+
+After the workspace is built, you must `source` the setup file. **You must do this every time you open a new terminal in the container.** This tells ROS where to find your compiled packages.
+
+**Command:**
+source /catkin_ws/devel/setup.bash
